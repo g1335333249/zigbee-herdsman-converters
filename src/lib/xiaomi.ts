@@ -201,14 +201,14 @@ export const numericAttributes2Payload = async (msg: Fz.Message, meta: Fz.Meta, 
             }
             break;
         case '9':
-            if (['ZNLDP13LM', 'ZNXDD01LM'].includes(model.model)) {
+            if (['ZNLDP13LM', 'ZNXDD01LM', 'ZNQBKG41LM'].includes(model.model)) {
                 // We don't know what the value means for these devices.
             }
             break;
         case '10':
             // Value 29146 is received for SSM-U02 sometimes here:
             // https://github.com/Koenkk/zigbee2mqtt/issues/17961#issuecomment-1616170548
-            if (['SSM-U01', 'DLKZMK11LM', 'SSM-U02', 'DLKZMK12LM'].includes(model.model) && (value === 1 || value === 2)) {
+            if (['SSM-U01', 'DLKZMK11LM', 'SSM-U02', 'DLKZMK12LM', 'ZNQBKG41LM'].includes(model.model) && (value === 1 || value === 2)) {
                 payload.switch_type = getFromLookup(value, {1: 'toggle', 2: 'momentary'});
             }
             break;
@@ -221,17 +221,17 @@ export const numericAttributes2Payload = async (msg: Fz.Message, meta: Fz.Meta, 
             }
             break;
         case '12':
-            if (['ZNLDP13LM', 'ZNXDD01LM'].includes(model.model)) {
+            if (['ZNLDP13LM', 'ZNXDD01LM', 'ZNQBKG41LM'].includes(model.model)) {
                 // We don't know what the value means for these devices.
             }
             break;
         case '13':
-            if (['ZNXDD01LM'].includes(model.model)) {
+            if (['ZNXDD01LM', 'ZNQBKG41LM'].includes(model.model)) {
                 // We don't know what the value means for these devices.
             }
             break;
         case '17':
-            if (['ZNXDD01LM'].includes(model.model)) {
+            if (['ZNXDD01LM', 'ZNQBKG41LM'].includes(model.model)) {
                 // We don't know what the value means for these devices.
             }
             break;
@@ -414,7 +414,7 @@ export const numericAttributes2Payload = async (msg: Fz.Message, meta: Fz.Meta, 
             }
             break;
         case '154':
-            if (['ZNLDP13LM', 'ZNXDD01LM'].includes(model.model)) {
+            if (['ZNLDP13LM', 'ZNXDD01LM', 'ZNQBKG41LM'].includes(model.model)) {
                 // We don't know what the value means for these devices.
             }
             break;

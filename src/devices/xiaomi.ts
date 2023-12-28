@@ -3661,6 +3661,30 @@ const definitions: Definition[] = [
         },
         ota: ota.zigbeeOTA,
     },
+    {
+        zigbeeModel: ['lumi.switch.acn055'],
+        model: 'ZNQBKG41LM',
+        vendor: 'Xiaomi',
+        description: 'Aqara smart wall switch Z1',
+        fromZigbee: [fz.on_off, fz.aqara_opple_multistate, xiaomi.fromZigbee.aqara_opple],
+        toZigbee: [tz.on_off, tz.xiaomi_switch_operation_mode_opple],
+        endpoint: (device) => {
+            return {'left': 1, 'center': 2, 'right': 3};
+        },
+        meta: {multiEndpoint: true},
+        exposes: [
+            e.switch().withEndpoint('left'), e.switch().withEndpoint('center'), e.switch().withEndpoint('right'),
+            e.power().withAccess(ea.STATE), e.energy(), e.device_temperature().withAccess(ea.STATE),
+            e.action(['single_left', 'double_left', 'single_center', 'double_center', 'single_right', 'double_right',
+                'single_left_center', 'double_left_center', 'single_left_right', 'double_left_right',
+                'single_center_right', 'double_center_right', 'single_all', 'double_all']),
+        ],
+        onEvent: preventReset,
+        configure: async (device, coordinatorEndpoint, logger) => {
+            await device.getEndpoint(1).write('aqaraOpple', {'mode': 1}, {manufacturerCode: 0x115f, disableResponse: true});
+        },
+        ota: ota.zigbeeOTA,
+    },
 ];
 
 export default definitions;
